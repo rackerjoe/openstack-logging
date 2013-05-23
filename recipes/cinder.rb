@@ -1,4 +1,4 @@
-# Cookbook Name:: openstack_logging
+# Cookbook Name:: openstack-logging
 # Recipe:: cinder
 #
 # Copyright 2013, Rackspace US, Inc.
