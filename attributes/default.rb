@@ -4,7 +4,7 @@ default["syslog"]["queue_offline_messages"] = true
 # default logging defs.
 # TODO(breu): need to figure out redhat
 # TODO(breu): need to add cinder
-default["openstack_logging"]["settings"] = {
+default["openstack-logging"]["settings"] = {
   # glance logging defs
   "glance-api" => {
     "monitor_logfile" => "/var/log/glance/api.log",
