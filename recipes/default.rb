@@ -66,8 +66,8 @@ elsif node.role?("rsyslog::client") or node[:recipes].include?("rsyslog::client"
     notifies :restart, "service[rsyslog]", :delayed
   end
 
-  include_recipe "openstack_logging::keystone"
-  include_recipe "openstack_logging::nova"
-  include_recipe "openstack_logging::glance"
-  include_recipe "openstack_logging::cinder"
+  include_recipe "openstack-logging::keystone"
+  include_recipe "openstack-logging::nova"
+  include_recipe "openstack-logging::glance"
+  include_recipe "openstack-logging::cinder"
 end
