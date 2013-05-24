@@ -16,9 +16,8 @@
 # limitations under the License.
 
 # Keystone rsyslog setup
-if node.recipe?("keystone::keystone-api") or node[:recipes].include?("keystone::keystone-api")
-  openstack_logging_filemonitor "keystone" do
-    monitor_name "keystone"
-    action :create
-  end
+openstack_logging_filemonitor "keystone" do
+  monitor_name "keystone"
+  action :create
+  only_if { if node.recipe?("keystone::keystone-api") }
 end

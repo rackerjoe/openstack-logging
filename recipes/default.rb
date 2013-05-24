@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if node.role?("rsyslog::server") or node[:recipes].include?("rsyslog::server")
+if node.role?("rsyslog::server")
   template "/etc/rsyslog.d/01-rpc-setup.conf" do
     source "rpc-server-setup.conf.erb"
     owner "root"
@@ -31,7 +31,7 @@ if node.role?("rsyslog::server") or node[:recipes].include?("rsyslog::server")
     mode "0600"
     notifies :restart, "service[rsyslog]", :delayed
   end
-elsif node.role?("rsyslog::client") or node[:recipes].include?("rsyslog::client")
+elsif node.role?("rsyslog::client")
   # borrowed from the rsyslog cookbook
   if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
     Chef::Log.fatal("Chef Solo does not support search, therefore it is a requirement of the rsyslog::client recipe that the attribute 'server_ip' is set when using Chef Solo. 'server_ip' is not set.")
