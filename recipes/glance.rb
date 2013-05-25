@@ -16,24 +16,24 @@
 # limitations under the License.
 
 # Glance rsyslog setup
-if node.recipe?("glance::api") or node[:recipes].include?("glance-api")
-  openstack_logging_filemonitor "glance-api" do
-    monitor_name "glance-api"
-    action :create
-  end
-  openstack_logging_filemonitor "glance-scrubber" do
-    monitor_name "glance-scrubber"
-    action :create
-  end
-  openstack_logging_filemonitor "glance-cache" do
-    monitor_name "glance-cache"
-    action :create
-  end
+openstack_logging_filemonitor "glance-api" do
+  monitor_name "glance-api"
+  action :create
+  only_if { node.recipe?("glance::api") }
+end
+openstack_logging_filemonitor "glance-scrubber" do
+  monitor_name "glance-scrubber"
+  action :create
+  only_if { node.recipe?("glance::api") }
+end
+openstack_logging_filemonitor "glance-cache" do
+  monitor_name "glance-cache"
+  action :create
+  only_if { node.recipe?("glance::api") }
 end
 
-if node.recipe?("glance::registry") or node[:recipes].include?("glance-registry")
-  openstack_logging_filemonitor "glance-registry" do
-    monitor_name "glance-registry"
-    action :create
-  end
+openstack_logging_filemonitor "glance-registry" do
+  monitor_name "glance-registry"
+  action :create
+  only_if { node.recipe?("glance::registry") }
 end
