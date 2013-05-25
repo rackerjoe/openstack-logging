@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if node.role?("rsyslog::server") or node[:recipes].include?("rsyslog::server")
+if node.role?("rsyslog::server")
   template "/etc/rsyslog.d/01-rpc-setup.conf" do
     source "rpc-server-setup.conf.erb"
     owner "root"
@@ -31,15 +31,19 @@ if node.role?("rsyslog::server") or node[:recipes].include?("rsyslog::server")
     mode "0600"
     notifies :restart, "service[rsyslog]", :delayed
   end
-elsif node.role?("rsyslog::client") or node[:recipes].include?("rsyslog::client")
+elsif node.role?("rsyslog::client")
   # borrowed from the rsyslog cookbook
   if !node['rsyslog']['server'] and node['rsyslog']['server_ip'].nil? and Chef::Config[:solo]
     Chef::Log.fatal("Chef Solo does not support search, therefore it is a requirement of the rsyslog::client recipe that the attribute 'server_ip' is set when using Chef Solo. 'server_ip' is not set.")
   elsif !node['rsyslog']['server']
-    rsyslog_server = node['rsyslog']['server_ip'] ||
-                     search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
-    rsyslog_port = node['rsyslog']['port'] ||
-                     search(:node, node['rsyslog']['server_search']).port rescue nil
+    if Chef::Config[:solo]
+      Chef::Log.warn("openstack-logging/default.rb: This recipe uses search. Chef Solo does not support search.")
+    else
+      rsyslog_server = node['rsyslog']['server_ip'] ||
+                       search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
+      rsyslog_port = node['rsyslog']['port'] ||
+                       search(:node, node['rsyslog']['server_search']).port rescue nil
+    end
 
     if rsyslog_server.nil?
       Chef::Application.fatal!("The rsyslog::client recipe was unable to determine the remote syslog server. Checked both the server_ip attribute and search()")

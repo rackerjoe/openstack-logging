@@ -16,21 +16,18 @@
 # limitations under the License.
 
 # Cinder rsyslog setup
-if node.recipe?("cinder::cinder-api") or node[:recipes].include?("cinder::cinder-api")
-  openstack_logging_filemonitor "cinder-api" do
-    monitor_name "cinder-api"
-    action :create
-  end
+openstack_logging_filemonitor "cinder-api" do
+  monitor_name "cinder-api"
+  action :create
+  only_if { node.recipe?("cinder::cinder-api") }
 end
-if node.recipe?("cinder::cinder-scheduler") or node[:recipes].include?("cinder::cinder-scheduler")
-  openstack_logging_filemonitor "cinder-scheduler" do
-    monitor_name "cinder-scheduler"
-    action :create
-  end
+openstack_logging_filemonitor "cinder-scheduler" do
+  monitor_name "cinder-scheduler"
+  action :create
+  only_if { node.recipe?("cinder::cinder-api") }
 end
-if node.recipe?("cinder::cinder-volume") or node[:recipes].include?("cinder::cinder-volume")
-  openstack_logging_filemonitor "cinder-volume" do
-    monitor_name "cinder-volume"
-    action :create
-  end
+openstack_logging_filemonitor "cinder-volume" do
+  monitor_name "cinder-volume"
+  action :create
+  only_if { node.recipe?("cinder::cinder-volume") }
 end
