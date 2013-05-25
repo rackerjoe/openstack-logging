@@ -19,17 +19,17 @@
 openstack_logging_filemonitor "glance-api" do
   monitor_name "glance-api"
   action :create
-  only_if { if node.recipe?("glance::api") }
+  only_if { node.recipe?("glance::api") }
 end
 openstack_logging_filemonitor "glance-scrubber" do
   monitor_name "glance-scrubber"
   action :create
-  only_if { if node.recipe?("glance::api") }
+  only_if { node.recipe?("glance::api") }
 end
 openstack_logging_filemonitor "glance-cache" do
   monitor_name "glance-cache"
   action :create
-  only_if { if node.recipe?("glance::api") }
+  only_if { node.recipe?("glance::api") }
 end
 
 openstack_logging_filemonitor "glance-registry" do
