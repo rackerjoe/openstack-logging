@@ -19,5 +19,5 @@
 openstack_logging_filemonitor "keystone" do
   monitor_name "keystone"
   action :create
-  only_if { if node.recipe?("keystone::keystone-api") }
+  only_if { node.recipe?("keystone::keystone-api") }
 end

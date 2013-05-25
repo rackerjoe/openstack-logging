@@ -29,5 +29,5 @@ end
 openstack_logging_filemonitor "cinder-volume" do
   monitor_name "cinder-volume"
   action :create
-  only_if { if node.recipe?("cinder::cinder-volume") }
+  only_if { node.recipe?("cinder::cinder-volume") }
 end
