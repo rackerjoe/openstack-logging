@@ -17,10 +17,10 @@
 
 # delete old rsyslog files from folsom cookbooks
 %w{/etc/rsyslog.d/24-cinder.conf /etc/rsyslog.d/22-glance.conf
-   /etc/rsyslog.d/23-keystone.conf /etc/rsyslog.d/21-nova.conf}.each do |rm|
-  file rm do
+   /etc/rsyslog.d/23-keystone.conf /etc/rsyslog.d/21-nova.conf}.each do |rmf|
+  file rmf do
     action :delete
-    only_if { ::File.exists?(#{rm}) }
+    only_if { ::File.exists?(rm) }
   end
 end
 
