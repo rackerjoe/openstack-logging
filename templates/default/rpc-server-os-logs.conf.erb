@@ -1,3 +1,9 @@
+# haproxy logs (logged to loca1)
+$template DYNhaproxy,"/var/log/rsyslog/%HOSTNAME%/haproxy/haproxy.log"
+if $fromhost-ip != '127.0.0.1' and $syslogfacility-text == 'local1' then ?DYNhaproxy
+if $fromhost-ip == '127.0.0.1' and $syslogfacility-text == 'local1' then /var/log/haproxy.log
+if $syslogfacility-text == 'local1' then ~
+
 # glance logs
 $template DYNglance_api,"/var/log/rsyslog/%HOSTNAME%/glance/api.log"
 $template DYNglance_registry,"/var/log/rsyslog/%HOSTNAME%/glance/registry.log"
