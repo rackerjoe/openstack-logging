@@ -20,7 +20,7 @@
    /etc/rsyslog.d/23-keystone.conf /etc/rsyslog.d/21-nova.conf}.each do |rmf|
   file rmf do
     action :delete
-    only_if { ::File.exists?(rm) }
+    only_if { ::File.exists?(rmf) }
   end
 end
 
