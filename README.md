@@ -22,6 +22,20 @@ Chef 0.10.0 or higher required (for Chef environment use).
 
 Attributes
 ----------
+* `syslog["queue_offline_messages"]` - Force the rsyslog cookbook to store log messages if the server is offline.  Defaults to true
+* `openstack-logging["settings"]` - define the log file location for log files that will be injected into the syslog stream. 
+
+# default logging defs.
+default["openstack-logging"]["settings"] = {
+  # glance logging defs
+  "glance-api" => {
+    "monitor_logfile" => "/var/log/glance/api.log",
+    "injection_tag" => "glance-api_log:",
+    "monitor_state_file" => "glance-api_log",
+    "injection_severity" => "info",
+    "injection_facility" => "local6"
+  }
+}
 
 Usage
 -----
