@@ -1,4 +1,4 @@
-openstack-monitoring Cookbook
+openstack-logging Cookbook
 =============================
 
 Support
@@ -27,7 +27,7 @@ Attributes
 
 Usage
 -----
-#### openstack-monitoring::default
+#### openstack-logging::default
 
 License and Authors
 -------------------
