@@ -33,6 +33,13 @@ if node.role?("rsyslog::server")
     notifies :restart, "service[rsyslog]", :delayed
   end
 
+  template "/etc/logrotate.d/rpc-logging.conf" do
+    source "rpc-logging.conf.erb"
+    owner "root"
+    group "root"
+    mode "0600"
+  end
+
   template "/etc/rsyslog.d/02-rpc-os-log-dest.conf" do
     source "rpc-server-os-logs.conf.erb"
     owner "root"
