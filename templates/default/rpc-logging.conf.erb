@@ -1,7 +1,13 @@
 # logrotate script for rotating log files from OpenStack services.
 
-/var/log/rsyslog/.log
+/var/log/rsyslog/*.log
+/var/log/rsyslog/debug
+/var/log/rsyslog/messages
+/var/log/rsyslog/syslog
 /var/log/rsyslog/*/*.log
+/var/log/rsyslog/*/debug
+/var/log/rsyslog/*/messages
+/var/log/rsyslog/*/syslog
 {
   rotate 3
   daily
