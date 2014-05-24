@@ -56,9 +56,9 @@ elsif node.recipe?("rsyslog::client")
       Chef::Log.warn("openstack-logging/default.rb: This recipe uses search. Chef Solo does not support search.")
     else
       rsyslog_server = node['rsyslog']['server_ip'] ||
-                       search(:node, node['rsyslog']['server_search']).first['ipaddress'] rescue nil
+                       search(:node, "#{node['rsyslog']['server_search']} AND chef_environment:#{node.chef_environment}").first['ipaddress'] rescue nil
       rsyslog_port = node['rsyslog']['port'] ||
-                       search(:node, node['rsyslog']['server_search']).port rescue nil
+                       search(:node, "#{node['rsyslog']['server_search']} AND chef_environment:#{node.chef_environment}").first['rsyslog'].port rescue nil
     end
 
     if rsyslog_server.nil?
