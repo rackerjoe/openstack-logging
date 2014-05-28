@@ -90,4 +90,5 @@ elsif node.recipe?("rsyslog::client")
   include_recipe "openstack-logging::nova"
   include_recipe "openstack-logging::glance"
   include_recipe "openstack-logging::cinder"
+  include_recipe "openstack-logging::neutron"
 end
